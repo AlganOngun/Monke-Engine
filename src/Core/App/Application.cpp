@@ -14,9 +14,9 @@ namespace Engine
 
 	void Application::Run()
 	{
-		while(true)
+		while (true)
 		{
-			
+
 		}
 	}
 }

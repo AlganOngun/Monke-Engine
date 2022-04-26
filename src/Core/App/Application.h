@@ -8,7 +8,9 @@ namespace Engine
 	{
 	public:
 		Application();
+
 		virtual ~Application();
+
 		void Run();
 	};
 
