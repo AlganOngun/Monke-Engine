@@ -1,4 +1,0 @@
-# ninja log v5
-0	24	1651091175297425928	src/CMakeFiles/Engine.dir/Core/App/Application.cpp.o	6852f5a714bc656
-5687	5920	1651091181193408362	src/libEngine.so	22a58df7a0a33926
-0	5686	1651091180953409078	src/CMakeFiles/Engine.dir/Core/Utilities/Logger/Logger.cpp.o	65a17f617cc0b4b9
