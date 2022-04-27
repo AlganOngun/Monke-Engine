@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../../Macros.h"
+#include <spdlog/spdlog.h>
 #include <string>
 
 namespace Engine
@@ -14,7 +15,10 @@ namespace Engine
 		Logger() {}
 
 		template<typename... Types>
-		void ILog(std::string message, Types... var2);
+		void ILog(Types... var2)
+		{
+			spdlog::info((var2)...);
+		}
 
 	public:
 		Logger(Logger const&) = delete;
@@ -22,6 +26,9 @@ namespace Engine
 		void operator=(Logger const&) = delete;
 
 		template<typename... Types>
-		static void Log(std::string message, Types... var2);
+		static void Log(Types... var2)
+		{
+			getInstance().ILog((var2)...);
+		}
 	};
 }
