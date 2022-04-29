@@ -6,6 +6,8 @@ namespace Engine
 	{
 		static Logger instance;
 
+		spdlog::set_pattern("%^[%H:%M:%S] [%l] - %v%$");
+
 		return instance;
 	}
 
