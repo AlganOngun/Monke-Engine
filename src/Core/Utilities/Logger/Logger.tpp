@@ -16,8 +16,32 @@ namespace Engine
 	}
 
 	template<typename... Types>
+	void Logger::LogWarning(Types... args)
+	{
+		getInstance().ILogWarning((args)...);
+	}
+
+	template<typename... Types>
+	void Logger::LogError(Types... args)
+	{
+		getInstance().ILogError((args)...);
+	}
+
+	template<typename... Types>
 	void Logger::ILog(Types... args)
 	{
 		spdlog::info((args)...);
+	}
+
+	template<typename... Types>
+	void Logger::ILogWarning(Types... args)
+	{
+		spdlog::warn((args)...);
+	}
+
+	template<typename... Types>
+	void Logger::ILogError(Types... args)
+	{
+		spdlog::error((args)...);
 	}
 }
