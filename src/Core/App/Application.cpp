@@ -1,4 +1,7 @@
 #include "Application.h"
+#include "../Utilities/Logger/Logger.h"
+#include "../Events/PrintEvent.h"
+#include <functional>
 
 namespace Engine
 {
@@ -14,9 +17,9 @@ namespace Engine
 
 	void Application::Run()
 	{
-		while (true)
-		{
-
-		}
+		std::function<void(PrintEvent)> listener = [](PrintEvent e) {Logger::Log(e.getMessage());};
+		
+		PrintEvent event("Hello Print Event", listener);
+		event.dispatch();
 	}
 }

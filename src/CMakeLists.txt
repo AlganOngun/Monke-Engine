@@ -1,4 +1,4 @@
-file(GLOB SourceFiles Core/App/*.cpp)
+file(GLOB SourceFiles Core/App/*.cpp Core/Events/*.cpp)
 
 add_library(Engine SHARED ${SourceFiles})
 target_link_libraries(Engine PRIVATE ${CMAKE_SOURCE_DIR}/Libraries/libspdlog.a)
