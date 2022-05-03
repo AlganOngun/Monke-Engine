@@ -1,34 +1,54 @@
 #include "Application.h"
 #include "../Utilities/Logger/Logger.h"
-#include "../Events/PrintEvent.h"
-#include "../EventSystem/EventDispatcher.h"
-#include <functional>
-#include <memory>
+#include <GLFW/glfw3.h>
 
 namespace Engine
 {
-	Application::Application()
-	{
+    Application::Application()
+    {
 
-	}
+    }
 
-	Application::~Application()
-	{
+    Application::~Application()
+    {
 
-	}
+    }
 
-	void Application::Run()
-	{
-		std::function<void(PrintEvent)> listener = [](PrintEvent e) {Logger::Log(e.getMessage());};
-		
-		auto event = std::unique_ptr<Event>{std::make_unique<PrintEvent>(PrintEvent("Hello Print Event", listener))};
-		auto event2 = std::unique_ptr<Event>{std::make_unique<PrintEvent>(PrintEvent("Hi Print Event", listener))};
-		auto event3 = std::unique_ptr<Event>{std::make_unique<PrintEvent>(PrintEvent("This is the 3rd print event", listener))};
+    void Application::Run()
+    {
+        glfwInit();
 
-		EventDispatcher::push(event);
-		EventDispatcher::push(event2);
-		EventDispatcher::push(event3);
-		
-		EventDispatcher::dispatchEvents();
-	}
+        GLFWwindow* window = glfwCreateWindow(800, 800, "Example Window", NULL, NULL);
+        glfwMakeContextCurrent(window);
+
+        while(!glfwWindowShouldClose(window))
+        {
+            float ratio;
+            int width, height;
+            glfwGetFramebufferSize(window, &width, &height);
+            ratio = width / (float)height;
+            glViewport(0, 0, width, height);
+            glClear(GL_COLOR_BUFFER_BIT);
+            glMatrixMode(GL_PROJECTION);
+            glLoadIdentity();
+            glOrtho(-ratio, ratio, -1.f, 1.f, 1.f, -1.f);
+            glMatrixMode(GL_MODELVIEW);
+            glLoadIdentity();
+            glRotatef((float)glfwGetTime() * 50.f, 0.f, 0.f, 1.f);
+            glBegin(GL_TRIANGLES);
+            glColor3f(1.f, 0.f, 0.f);
+            glVertex3f(-0.6f, -0.4f, 0.f);
+            glColor3f(0.f, 1.f, 0.f);
+            glVertex3f(0.6f, -0.4f, 0.f);
+            glColor3f(0.f, 0.f, 1.f);
+            glVertex3f(0.f, 0.6f, 0.f);
+            glEnd();
+            glfwSwapBuffers(window);
+            glfwPollEvents();
+        }
+
+        glfwDestroyWindow(window);
+
+        glfwTerminate();
+    }
 }
