@@ -6,13 +6,16 @@
 #include <string>
 #include <functional>
 
-class EI PrintEvent : public Event
+namespace Engine::EventSystem
 {
-	std::function<void(PrintEvent)> listenerFunction;
-	std::string message;
-public:
-	PrintEvent(std::string message, std::function<void(PrintEvent)> listenerFunction) : message(message), listenerFunction(listenerFunction) {}
+    class EI PrintEvent : public Event
+    {
+            std::function<void(PrintEvent)> listenerFunction;
+            std::string message;
+        public:
+            PrintEvent(std::string message, std::function<void(PrintEvent)> listenerFunction) : message(message), listenerFunction(listenerFunction) {}
 
-	void dispatch();
-	std::string getMessage();
-};
+            void dispatch();
+            std::string getMessage();
+    };
+}

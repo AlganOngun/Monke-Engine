@@ -2,33 +2,36 @@
 #include "EventDispatcher.h"
 #include <algorithm>
 
-EventDispatcher& EventDispatcher::getInstance()
+namespace Engine::EventSystem
 {
-    static EventDispatcher instance;
-
-    return instance;
-}
-
-void EventDispatcher::IdispatchEvents()
-{
-    while(!eventQueue.empty())
+    EventDispatcher& EventDispatcher::getInstance()
     {
-        eventQueue.front()->dispatch();
-        eventQueue.pop();
+        static EventDispatcher instance;
+
+        return instance;
     }
-}
 
-void EventDispatcher::Ipush(std::unique_ptr<Event>& event)
-{
-    eventQueue.push(std::move(event));
-}
+    void EventDispatcher::IdispatchEvents()
+    {
+        while(!eventQueue.empty())
+        {
+            eventQueue.front()->dispatch();
+            eventQueue.pop();
+        }
+    }
 
-void EventDispatcher::push(std::unique_ptr<Event>& event)
-{
-    getInstance().Ipush(event);
-}
+    void EventDispatcher::Ipush(std::unique_ptr<Event>& event)
+    {
+        eventQueue.push(std::move(event));
+    }
 
-void EventDispatcher::dispatchEvents()
-{
-    getInstance().IdispatchEvents();
+    void EventDispatcher::push(std::unique_ptr<Event>& event)
+    {
+        getInstance().Ipush(event);
+    }
+
+    void EventDispatcher::dispatchEvents()
+    {
+        getInstance().IdispatchEvents();
+    }
 }

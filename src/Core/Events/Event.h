@@ -3,8 +3,11 @@
 #include "../Macros.h"
 #include <functional>
 
-class EI Event
+namespace Engine::EventSystem
 {
-public:
-	virtual void dispatch() = 0;
-};
+    class EI Event
+    {
+        public:
+            virtual void dispatch() = 0;
+    };
+}

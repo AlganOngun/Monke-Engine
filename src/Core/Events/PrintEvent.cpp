@@ -1,11 +1,14 @@
 #include "PrintEvent.h"
 
-void PrintEvent::dispatch()
+namespace Engine::EventSystem
 {
-	listenerFunction(*this);
-}
+    void PrintEvent::dispatch()
+    {
+        listenerFunction(*this);
+    }
 
-std::string PrintEvent::getMessage()
-{
-	return message;
+    std::string PrintEvent::getMessage()
+    {
+        return message;
+    }
 }
