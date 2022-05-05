@@ -127,13 +127,13 @@ After your project compiles successfully, now you can start using the engine. To
       return new MyApplication();
    }
    ```
-4. Now Monke Engine Will Handle Starting you application for you so you can now delete your main function
+4. Now Monke Engine Will Handle Starting your application for you so you can now delete your main function
 5. Congratulations you're set you can type in code inside of your MyApplication constructor or destructor and it will run
 6. Try running the following code snippet inside of your ```MyApplication()```
    ```cpp
    Engine::Logger::Log("Hello, MonkeEngine");
    ```
-7. If you setted up everythin correctly you should see ```Hello, MonkeEngine``` in your console
+7. If you setted up everything correctly you should see ```Hello, MonkeEngine``` in your console
 
 ## Contributing
 
