@@ -1,11 +1,5 @@
 <div id="top"></div>
 
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
-
 <br />
 <div align="center">
   <a href="https://github.com/AlganOngun/Monke-Engine">
@@ -17,6 +11,11 @@
   <p align="center">
     An Open Source Game Engine To Make Your Dream Game
     <br />
+    [![Contributors][contributors-shield]][contributors-url]
+    [![Forks][forks-shield]][forks-url]
+    [![Stargazers][stars-shield]][stars-url]
+    [![Issues][issues-shield]][issues-url]
+    [![MIT License][license-shield]][license-url]
     <br />
     <br />
     ·
