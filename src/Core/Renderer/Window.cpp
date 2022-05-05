@@ -6,10 +6,16 @@ namespace Engine::Renderer
     Window::Window(std::string name, int width, int height)
     {
         GLFWwindow* windowRaw = glfwCreateWindow(width, height, name.c_str(), NULL, NULL);
-        glfwMakeContextCurrent(windowRaw);
 
         window.reset(windowRaw);
     }
+
+	Window::Window(Window& newWindow)
+	{
+		GLFWwindow* windowRaw = newWindow.window.release();
+
+		window.reset(windowRaw);
+	}
 
     void Window::update()
     {
@@ -20,4 +26,15 @@ namespace Engine::Renderer
 
         window.reset(windowRaw);
     }
+
+	bool Window::shouldEnd()
+	{
+		GLFWwindow* windowRaw = window.release();
+
+		bool result = glfwWindowShouldClose(windowRaw);
+
+		window.reset(windowRaw);
+
+		return result;
+	}
 }

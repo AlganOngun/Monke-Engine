@@ -3,12 +3,17 @@
 #include <memory>
 #include <GLFW/glfw3.h>
 #include <string>
+#include "../Macros.h"
 
 namespace Engine::Renderer
 {
-    class Window
+    class EI Window
     {
     private:
+        std::string name;
+        int width;
+        int height;
+
         struct deleteGLFWwindow
         {
             void operator()(GLFWwindow* ptr)
@@ -21,9 +26,11 @@ namespace Engine::Renderer
 
         smartWindow window;
 
-	public:
-		Window(std::string name, int width, int height);
+    public:
+        Window(std::string name, int width, int height);
+        Window(Window& newWindow);
 
-		void update();
+        void update();
+		bool shouldEnd();
     };
 }
