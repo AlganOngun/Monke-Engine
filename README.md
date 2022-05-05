@@ -7,15 +7,18 @@
   </a>
 
   <h3 align="center">Monke Engine</h3>
-  
+
+  <p align="center">
+    An Open Source Game Engine To Make Your Dream Game
+  </p>
+    
   [![Contributors][contributors-shield]][contributors-url]
   [![Forks][forks-shield]][forks-url]
   [![Stargazers][stars-shield]][stars-url]
   [![Issues][issues-shield]][issues-url]
   [![MIT License][license-shield]][license-url]
-
+  
   <p align="center">
-    An Open Source Game Engine To Make Your Dream Game
     <br />
     <br />
     <br />
