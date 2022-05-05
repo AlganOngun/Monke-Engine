@@ -20,8 +20,6 @@
   
   <p align="center">
     <br />
-    <br />
-    <br />
     ·
     <a href="https://github.com/AlganOngun/Monke-Engine/issues">Report Bug</a>
     ·
