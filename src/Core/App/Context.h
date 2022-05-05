@@ -16,7 +16,5 @@ namespace Engine
 
 		void setWindow(Renderer::Window window);
 		void update();
-
-		bool shouldContextEnd();
     };
 }

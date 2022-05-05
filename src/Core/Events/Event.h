@@ -1,13 +1,13 @@
 #pragma once
 
 #include "../Macros.h"
-#include <functional>
+#include <string>
 
 namespace Engine::EventSystem
 {
     class EI Event
     {
-        public:
-            virtual void dispatch() = 0;
+	public:
+		inline virtual std::string getType() {return "TypeEvent";};
     };
 }

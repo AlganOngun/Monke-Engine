@@ -23,9 +23,4 @@ namespace Engine
 	{
 		window->update();
 	}
-
-	bool Context::shouldContextEnd()
-	{
-		return window->shouldEnd();
-	}
 }

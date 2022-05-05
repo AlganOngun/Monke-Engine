@@ -1,6 +1,6 @@
 #pragma once
 
-#include <queue>
+#include <functional>
 #include <memory>
 #include "../Macros.h"
 #include "../Events/Event.h"
@@ -9,23 +9,19 @@ namespace Engine::EventSystem
 {
     class EI EventDispatcher
     {
-    public:
-        static EventDispatcher& getInstance();
+	private:
+		Event& event;
+	public:
+		EventDispatcher(Event& event) : event(event) {}
 
-    private:
-        std::queue<std::unique_ptr<Event>> eventQueue;
-
-        EventDispatcher() {}
-
-        void Ipush(std::unique_ptr<Event>& event);
-        void IdispatchEvents();
-
-    public:
-        EventDispatcher(EventDispatcher const&) = delete;
-
-        void operator=(EventDispatcher const&) = delete;
-
-        static void push(std::unique_ptr<Event>& event);
-        static void dispatchEvents();
+		template<typename T>
+		void dispatch(const std::function<void(T&)>& callback)
+		{
+			T dummy;
+			if(event.getType() == dummy.getType())
+			{
+				callback(*(T*)&event);
+			}
+		}
     };
 }

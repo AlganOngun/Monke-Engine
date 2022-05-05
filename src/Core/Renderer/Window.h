@@ -2,6 +2,8 @@
 
 #include <memory>
 #include <GLFW/glfw3.h>
+#include <functional>
+#include "../Events/Event.h"
 #include <string>
 #include "../Macros.h"
 
@@ -13,6 +15,7 @@ namespace Engine::Renderer
         std::string name;
         int width;
         int height;
+		static std::function<void(Engine::EventSystem::Event&)> callbackFunction;
 
         struct deleteGLFWwindow
         {
@@ -30,7 +33,9 @@ namespace Engine::Renderer
         Window(std::string name, int width, int height);
         Window(Window& newWindow);
 
+		void init();
         void update();
-		bool shouldEnd();
+		static void callCallbackFunction(const Engine::EventSystem::Event& event);
+		void setEventCallbackFunction(const std::function<void(Engine::EventSystem::Event&)>& function);
     };
 }
