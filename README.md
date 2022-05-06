@@ -9,7 +9,7 @@
   <h3 align="center">Monke Engine</h3>
 
   <p align="center">
-    An Open Source Game Engine To Make Your Dream Game
+    An Open Source, Cross-Platform Game Engine To Make Your Dream Game
   </p>
     
   [![Contributors][contributors-shield]][contributors-url]
