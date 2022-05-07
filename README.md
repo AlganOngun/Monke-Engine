@@ -3,7 +3,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/AlganOngun/Monke-Engine">
-    <img src="https://i1.sndcdn.com/avatars-ylM4tanwBXJZhjWb-X76mWw-t240x240.jpg" alt="Logo" width="150" height="150">
+    <img src="https://i1.sndcdn.com/avatars-ylM4tanwBXJZhjWb-X76mWw-t240x240.jpg" alt="Logo" width="175" height="175">
   </a>
 
   <h3 align="center">Monke Engine</h3>
