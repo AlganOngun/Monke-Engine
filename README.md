@@ -3,13 +3,13 @@
 <br />
 <div align="center">
   <a href="https://github.com/AlganOngun/Monke-Engine">
-    <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpoliticsandwar.com%2Fuploads%2F4d9aee1eb2b42d5ac53a288ce9705b1303e5264e1000x56217.jpeg&f=1&nofb=1" alt="Logo" width="150" height="150">
+    <img src="https://i1.sndcdn.com/avatars-ylM4tanwBXJZhjWb-X76mWw-t240x240.jpg" alt="Logo" width="175" height="175">
   </a>
 
   <h3 align="center">Monke Engine</h3>
 
   <p align="center">
-    An Open Source Game Engine To Make Your Dream Game
+    An Open Source, Cross-Platform Game Engine To Make Your Dream Game
   </p>
     
   [![Contributors][contributors-shield]][contributors-url]
