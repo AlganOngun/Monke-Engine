@@ -2,6 +2,8 @@
 #include <GLFW/glfw3.h>
 #include "../Events/WindowCloseEvent.h"
 #include "../Events/WindowResizeEvent.h"
+#include "../Events/KeyReleasedEvent.h"
+#include "../Events/KeyPressedEvent.h"
 #include "../Utilities/Logger/Logger.h"
 
 namespace Engine::Renderer
@@ -11,9 +13,9 @@ namespace Engine::Renderer
         GLFWwindow* windowRaw = glfwCreateWindow(width, height, name.c_str(), NULL, NULL);
         window.reset(windowRaw);
 
-		properties.name = name;
-		properties.width = width;
-		properties.height = height;
+        properties.name = name;
+        properties.width = width;
+        properties.height = height;
     }
 
     Window::Window(Window& newWindow)
@@ -27,23 +29,50 @@ namespace Engine::Renderer
     {
         GLFWwindow* windowRaw = window.release();
 
-		glfwSetWindowUserPointer(windowRaw, &properties);
+        glfwSetWindowUserPointer(windowRaw, &properties);
 
-        glfwSetWindowCloseCallback(windowRaw, [](GLFWwindow * win)
+        glfwSetWindowCloseCallback(windowRaw, [](GLFWwindow * window)
         {
             Engine::EventSystem::WindowCloseEvent event;
 
-			windowProperties properties = *(windowProperties*)glfwGetWindowUserPointer(win);
-			properties.callbackFunction(event);
+            windowProperties properties = *(windowProperties*)glfwGetWindowUserPointer(window);
+            properties.callbackFunction(event);
         });
 
-        glfwSetWindowSizeCallback(windowRaw, [](GLFWwindow * win, int width, int height)
+        glfwSetWindowSizeCallback(windowRaw, [](GLFWwindow * window, int width, int height)
         {
             Engine::EventSystem::WindowResizeEvent event(width, height);
 
-			windowProperties properties = *(windowProperties*)glfwGetWindowUserPointer(win);
-			properties.callbackFunction(event);
+            windowProperties properties = *(windowProperties*)glfwGetWindowUserPointer(window);
+            properties.callbackFunction(event);
         });
+
+        glfwSetKeyCallback(windowRaw, [](GLFWwindow * window, int key, int scancode, int action, int mods)
+		{
+			windowProperties properties = *(windowProperties*)glfwGetWindowUserPointer(window);
+
+			switch(action)
+			{
+				case GLFW_PRESS:
+				{
+					EventSystem::KeyPressedEvent event(key);
+					properties.callbackFunction(event);
+					break;
+				}
+				case GLFW_RELEASE:
+				{
+					EventSystem::KeyReleasedEvent event(key);
+					properties.callbackFunction(event);
+					break;
+				}
+				case GLFW_REPEAT:
+				{
+					EventSystem::KeyPressedEvent event(key);
+					properties.callbackFunction(event);
+					break;
+				}
+			}
+		});
 
         window.reset(windowRaw);
     }
