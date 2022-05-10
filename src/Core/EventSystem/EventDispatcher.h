@@ -4,6 +4,8 @@
 #include <memory>
 #include "../Macros.h"
 #include "../Events/Event.h"
+#include "../Events/WindowCloseEvent.h"
+#include "../Events/WindowResizeEvent.h"
 
 namespace Engine::EventSystem
 {

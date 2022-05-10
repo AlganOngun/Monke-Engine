@@ -1,15 +1,19 @@
 #include "Window.h"
 #include <GLFW/glfw3.h>
 #include "../Events/WindowCloseEvent.h"
+#include "../Events/WindowResizeEvent.h"
+#include "../Utilities/Logger/Logger.h"
 
 namespace Engine::Renderer
 {
-	std::function<void(Engine::EventSystem::Event&)> Window::callbackFunction;
-
     Window::Window(std::string name, int width, int height)
     {
         GLFWwindow* windowRaw = glfwCreateWindow(width, height, name.c_str(), NULL, NULL);
         window.reset(windowRaw);
+
+		properties.name = name;
+		properties.width = width;
+		properties.height = height;
     }
 
     Window::Window(Window& newWindow)
@@ -23,13 +27,25 @@ namespace Engine::Renderer
     {
         GLFWwindow* windowRaw = window.release();
 
+		glfwSetWindowUserPointer(windowRaw, &properties);
+
         glfwSetWindowCloseCallback(windowRaw, [](GLFWwindow * win)
         {
             Engine::EventSystem::WindowCloseEvent event;
-			Window::callbackFunction(event);
+
+			windowProperties properties = *(windowProperties*)glfwGetWindowUserPointer(win);
+			properties.callbackFunction(event);
         });
 
-		window.reset(windowRaw);
+        glfwSetWindowSizeCallback(windowRaw, [](GLFWwindow * win, int width, int height)
+        {
+            Engine::EventSystem::WindowResizeEvent event(width, height);
+
+			windowProperties properties = *(windowProperties*)glfwGetWindowUserPointer(win);
+			properties.callbackFunction(event);
+        });
+
+        window.reset(windowRaw);
     }
 
     void Window::update()
@@ -42,8 +58,8 @@ namespace Engine::Renderer
         window.reset(windowRaw);
     }
 
-    void Window::setEventCallbackFunction(const std::function<void(Engine::EventSystem::Event&)>& function)
+    void Window::setEventCallbackFunction(const callbackFunctionType& function)
     {
-        callbackFunction = function;
+        properties.callbackFunction = function;
     }
 }

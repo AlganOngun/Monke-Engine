@@ -1,49 +1,38 @@
-#include "spdlog/spdlog.h"
-
 namespace Engine
 {
-	Logger& Logger::getInstance()
+	template<typename... Types>
+	void Logger::Log(std::string message, Types... args)
 	{
-		static Logger instance;
-
-		spdlog::set_pattern("%^[%H:%M:%S] [%l] - %v%$");
-
-		return instance;
+		getInstance()->ILog(message, (args)...);
 	}
 
 	template<typename... Types>
-	void Logger::Log(Types... args)
+	void Logger::LogWarning(std::string message, Types... args)
 	{
-		getInstance().ILog((args)...);
+		getInstance()->ILogWarning(message, (args)...);
 	}
 
 	template<typename... Types>
-	void Logger::LogWarning(Types... args)
+	void Logger::LogError(std::string message, Types... args)
 	{
-		getInstance().ILogWarning((args)...);
+		getInstance()->ILogError(message, (args)...);
 	}
 
 	template<typename... Types>
-	void Logger::LogError(Types... args)
+	void Logger::ILog(std::string message, Types... args)
 	{
-		getInstance().ILogError((args)...);
+		console->info(message, (args)...);
 	}
 
 	template<typename... Types>
-	void Logger::ILog(Types... args)
+	void Logger::ILogWarning(std::string message, Types... args)
 	{
-		spdlog::info((args)...);
+		console->warn(message, (args)...);
 	}
 
 	template<typename... Types>
-	void Logger::ILogWarning(Types... args)
+	void Logger::ILogError(std::string message, Types... args)
 	{
-		spdlog::warn((args)...);
-	}
-
-	template<typename... Types>
-	void Logger::ILogError(Types... args)
-	{
-		spdlog::error((args)...);
+		console->error(message, (args)...);
 	}
 }

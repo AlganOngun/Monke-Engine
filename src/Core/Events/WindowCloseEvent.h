@@ -4,9 +4,11 @@
 
 namespace Engine::EventSystem
 {
-    class WindowCloseEvent : public Event
+    class EI WindowCloseEvent : public Event
     {
     public:
-		inline std::string getType() {return "TypeWindowCloseEvent";};
+        std::string getType();
+
+        void print();
     };
 }

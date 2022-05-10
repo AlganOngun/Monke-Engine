@@ -1,8 +1,12 @@
 #pragma once
 
 #include "../Macros.h"
-#include "../Events/Event.h"
-#include "../Events/WindowCloseEvent.h"
+
+namespace Engine::EventSystem
+{
+	class Event;
+	class WindowCloseEvent;
+}
 
 namespace Engine
 {

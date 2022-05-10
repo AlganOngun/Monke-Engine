@@ -1,40 +1,42 @@
 #pragma once
 
 #include "../../Macros.h"
+#include <memory>
 #include <string>
+#include <spdlog/spdlog.h>
 
 namespace Engine
 {
 	class EI Logger
 	{
 	public:
-		static Logger& getInstance();
+		static Logger* getInstance();
 
 	private:
-		Logger() {}
 
 		template<typename... Types>
-		void ILog(Types... args);
+		void ILog(std::string message, Types... args);
 
 		template<typename... Types>
-		void ILogWarning(Types... args);
+		void ILogWarning(std::string message, Types... args);
 
 		template<typename... Types>
-		void ILogError(Types... args);
+		void ILogError(std::string message, Types... args);
+
+		std::shared_ptr<spdlog::logger> console;
 
 	public:
-		Logger(Logger const&) = delete;
 
-		void operator=(Logger const&) = delete;
-
-		template<typename... Types>
-		static void Log(Types... args);
+		Logger();
 
 		template<typename... Types>
-		static void LogWarning(Types... args);
+		static void Log(std::string message, Types... args);
 
 		template<typename... Types>
-		static void LogError(Types... args);
+		static void LogWarning(std::string message, Types... args);
+
+		template<typename... Types>
+		static void LogError(std::string message, Types... args);
 	};
 }
 

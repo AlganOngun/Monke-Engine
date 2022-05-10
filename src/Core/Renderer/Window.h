@@ -12,10 +12,7 @@ namespace Engine::Renderer
     class EI Window
     {
     private:
-        std::string name;
-        int width;
-        int height;
-		static std::function<void(Engine::EventSystem::Event&)> callbackFunction;
+
 
         struct deleteGLFWwindow
         {
@@ -26,16 +23,27 @@ namespace Engine::Renderer
         };
 
         using smartWindow = std::unique_ptr<GLFWwindow, deleteGLFWwindow>;
+        using callbackFunctionType = std::function<void(Engine::EventSystem::Event&)>;
+
+        struct windowProperties
+        {
+            std::string name;
+            int width;
+            int height;
+            callbackFunctionType callbackFunction;
+        };
+
+		windowProperties properties;
 
         smartWindow window;
 
     public:
+
         Window(std::string name, int width, int height);
         Window(Window& newWindow);
 
-		void init();
+        void init();
         void update();
-		static void callCallbackFunction(const Engine::EventSystem::Event& event);
-		void setEventCallbackFunction(const std::function<void(Engine::EventSystem::Event&)>& function);
+        void setEventCallbackFunction(const callbackFunctionType& function);
     };
 }

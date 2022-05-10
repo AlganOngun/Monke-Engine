@@ -7,7 +7,9 @@ namespace Engine::EventSystem
 {
     class EI Event
     {
-	public:
-		inline virtual std::string getType() {return "TypeEvent";};
+    public:
+        virtual std::string getType();
+
+        virtual void print();
     };
 }
