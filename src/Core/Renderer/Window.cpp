@@ -4,6 +4,7 @@
 #include "../Events/WindowResizeEvent.h"
 #include "../Events/KeyReleasedEvent.h"
 #include "../Events/KeyPressedEvent.h"
+#include "../Events/WindowCursorPositionEvent.h"
 #include "../Utilities/Logger/Logger.h"
 
 namespace Engine::Renderer
@@ -48,31 +49,39 @@ namespace Engine::Renderer
         });
 
         glfwSetKeyCallback(windowRaw, [](GLFWwindow * window, int key, int scancode, int action, int mods)
-		{
-			windowProperties properties = *(windowProperties*)glfwGetWindowUserPointer(window);
+        {
+            windowProperties properties = *(windowProperties*)glfwGetWindowUserPointer(window);
 
-			switch(action)
-			{
-				case GLFW_PRESS:
-				{
-					EventSystem::KeyPressedEvent event(key);
-					properties.callbackFunction(event);
-					break;
-				}
-				case GLFW_RELEASE:
-				{
-					EventSystem::KeyReleasedEvent event(key);
-					properties.callbackFunction(event);
-					break;
-				}
-				case GLFW_REPEAT:
-				{
-					EventSystem::KeyPressedEvent event(key);
-					properties.callbackFunction(event);
-					break;
-				}
-			}
-		});
+            switch(action)
+            {
+                case GLFW_PRESS:
+                {
+                    EventSystem::KeyPressedEvent event(key);
+                    properties.callbackFunction(event);
+                    break;
+                }
+                case GLFW_RELEASE:
+                {
+                    EventSystem::KeyReleasedEvent event(key);
+                    properties.callbackFunction(event);
+                    break;
+                }
+                case GLFW_REPEAT:
+                {
+                    EventSystem::KeyPressedEvent event(key);
+                    properties.callbackFunction(event);
+                    break;
+                }
+            }
+        });
+
+        glfwSetCursorPosCallback(windowRaw, [](GLFWwindow * window, double x, double y)
+        {
+            windowProperties properties = *(windowProperties*)glfwGetWindowUserPointer(window);
+
+			Engine::EventSystem::WindowCursorPositionEvent event(x, y);
+			properties.callbackFunction(event);
+        });
 
         window.reset(windowRaw);
     }
